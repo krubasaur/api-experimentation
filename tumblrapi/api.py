@@ -77,12 +77,13 @@ def get_user_info():
         print('HTTP Request failed')
 
 def get_tagged_posts(keyword):
-    # Get posts tagged with a certain tag keyword
+    # Get 1 post tagged with a certain tag keyword
     try:
         response = requests.get(
         url = 'http://api.tumblr.com/v2/tagged?tag={keyword}'.format(keyword=keyword),
         params = {
-        'api_key': params.api_key},
+        'api_key': params.api_key,
+        'limit': '1'},
         )
         print('Response HTTP Status Code: {status_code}'.format(
                 status_code=response.status_code))
@@ -91,8 +92,8 @@ def get_tagged_posts(keyword):
     except requests.exceptions.RequestException:
         print('HTTP Request failed')
 
-get_blog_info()
-get_blog_posts()
-get_avatar()
+# get_blog_info()
+# get_blog_posts()
+# get_avatar()
 # get_user_info()
 get_tagged_posts('happy')
