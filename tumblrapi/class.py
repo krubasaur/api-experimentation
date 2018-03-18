@@ -1,5 +1,7 @@
-import params
 import requests
+
+import params
+
 
 class TumblrRequest(object):
     def __init__(
