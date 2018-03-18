@@ -4,16 +4,17 @@ import requests
 
 # TODO:
 #  * Consolidate these three now that we know the basic functionality works
-#  * as expected.
+#    as expected.
 #  * Rename the url variables for base, blog, user, etc.
 
 
-blog_url = 'http://api.tumblr.com/v2/blog/krubasaur.tumblr.com/'
-user_url = 'http://api.tumblr.com/v2/user/'
-base_url = ''
+base_url = 'http://api.tumblr.com/v2'
+blog_url = base_url + '/blog/krubasaur.tumblr.com/'
+user_url = base_url + '/user/'
+params = {'api_key': params.api_key}
 
 
-def get_blog_info():
+def get_blog_info(params=params):
     # Get blog info
     try:
         response = requests.get(
@@ -80,7 +81,7 @@ def get_tagged_posts(keyword):
     # Get 1 post tagged with a certain tag keyword
     try:
         response = requests.get(
-        url = 'http://api.tumblr.com/v2/tagged?tag={keyword}'.format(keyword=keyword),
+        url = base_url + '/tagged?tag={keyword}'.format(keyword=keyword),
         params = {
         'api_key': params.api_key,
         'limit': '1'},
@@ -92,8 +93,8 @@ def get_tagged_posts(keyword):
     except requests.exceptions.RequestException:
         print('HTTP Request failed')
 
-# get_blog_info()
+get_blog_info()
 # get_blog_posts()
 # get_avatar()
 # get_user_info()
-get_tagged_posts('happy')
+# get_tagged_posts('happy')
