@@ -10,8 +10,8 @@ class TumblrRequest(object):
         consumer_secret=params.consumer_secret,
         oauth_token=params.oauth_token,
         oauth_secret=params.token_secret, #change in params.py
-        host="http://api.tumblr.com"):
-
+        host="http://api.tumblr.com/"
+    ):
         self.host = host
         # self.consumer_key = params.consumer_key
         # self.consumer_secret = params.consumer_secret
