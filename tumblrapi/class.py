@@ -24,7 +24,7 @@ class TumblrRequest(object):
 
         try:
             response = requests.get(
-            url, params={params.consumer_key}
+                url, params={'api_key': params.consumer_key}
             )
             print('Response HTTP Status Code: {status_code}'.format(
                 status_code=response.status_code))
