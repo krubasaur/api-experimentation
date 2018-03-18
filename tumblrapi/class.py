@@ -34,7 +34,10 @@ class TumblrRequest(object):
             print('HTTP Request failed')
 
 
-tumblr_request = TumblrRequest()
+def main():
+    tumblr_request = TumblrRequest()
+    tumblr_request.get(url='v2/blog/krubasaur.tumblr.com/info')
 
-request = tumblr_request.get(url='v2/blog/krubasaur.tumblr.com/info')
-request()
+
+if __name__ == '__main__':
+    main()
