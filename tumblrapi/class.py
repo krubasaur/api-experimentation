@@ -2,6 +2,7 @@ import requests
 
 import params
 
+# TODO: * test retrieving other types of data than status_code & content 
 
 class TumblrRequest(object):
     def __init__(
