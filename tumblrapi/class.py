@@ -15,8 +15,7 @@ class TumblrRequest(object):
         self.host = host
 
     def get(self, url):
-        url = self.host + url
-
+        
         try:
             response = requests.get(
                 url, params={'api_key': params.consumer_key}
@@ -30,17 +29,8 @@ class TumblrRequest(object):
 
     def get_blog_info(self):
         url = self.host + 'v2/blog/krubasaur.tumblr.com/info'
-        
-        try:
-            response = requests.get(
-                url, params={'api_key': params.consumer_key}
-            )
-            print('Response HTTP Status Code: {status_code}'.format(
-                status_code=response.status_code))
-            print('Response HTTP Response Body: {content}'.format(
-                content=response.content))
-        except requests.exceptions.RequestException:
-            print('HTTP Request failed')
+
+        self.get(url)
 
 def main():
     linebreak = '\n\n' + '=' * 80 + '\n\n'
@@ -55,18 +45,18 @@ def main():
     request = TumblrRequest()
     request.get_blog_info()
 
-    print(linebreak + 'BLOG POSTS:\n')
-
-    get_blog_posts = TumblrRequest()
-    get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
-
-    print(linebreak + 'BLOG AVATAR:\n')
-    get_avatar = TumblrRequest()
-    get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
-
-    print(linebreak + 'TAGGED POSTS:\n')
-    get_tagged_posts = TumblrRequest()
-    get_tagged_posts.get(url='v2/tagged?tag=happy&limit=1')
+    # print(linebreak + 'BLOG POSTS:\n')
+    #
+    # get_blog_posts = TumblrRequest()
+    # get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
+    #
+    # print(linebreak + 'BLOG AVATAR:\n')
+    # get_avatar = TumblrRequest()
+    # get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
+    #
+    # print(linebreak + 'TAGGED POSTS:\n')
+    # get_tagged_posts = TumblrRequest()
+    # get_tagged_posts.get(url='v2/tagged?tag=happy&limit=1')
 
 if __name__ == '__main__':
     main()
