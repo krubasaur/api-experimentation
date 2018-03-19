@@ -35,9 +35,25 @@ class TumblrRequest(object):
 
 
 def main():
-    tumblr_request = TumblrRequest()
-    tumblr_request.get(url='v2/blog/krubasaur.tumblr.com/info')
+    linebreak = '\n\n' + '=' * 80 + '\n\n'
 
+    print(linebreak + 'BLOG INFO:\n')
+
+    get_blog_info = TumblrRequest()
+    get_blog_info.get(url='v2/blog/krubasaur.tumblr.com/info')
+
+    print(linebreak + 'BLOG POSTS:\n')
+
+    get_blog_posts = TumblrRequest()
+    get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
+
+    print(linebreak + 'BLOG AVATAR:\n')
+    get_avatar = TumblrRequest()
+    get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
+
+    print(linebreak + 'TAGGED POSTS:\n')
+    get_tagged_posts = TumblrRequest()
+    get_tagged_posts.get(url='v2/tagged?tag=happy')
 
 if __name__ == '__main__':
     main()
