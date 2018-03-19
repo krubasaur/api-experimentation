@@ -13,15 +13,9 @@ class TumblrRequest(object):
         host="http://api.tumblr.com/"
     ):
         self.host = host
-        # self.consumer_key = params.consumer_key
-        # self.consumer_secret = params.consumer_secret
-        # self.oauth_token = params.oauth_token
-        # self.oauth_secret = params.oauth_secret
-        # self.host = host
 
     def get(self, url):
-        url = self.host + url
-
+        
         try:
             response = requests.get(
                 url, params={'api_key': params.consumer_key}
@@ -33,27 +27,36 @@ class TumblrRequest(object):
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
+    def get_blog_info(self):
+        url = self.host + 'v2/blog/krubasaur.tumblr.com/info'
+
+        self.get(url)
 
 def main():
     linebreak = '\n\n' + '=' * 80 + '\n\n'
 
-    print(linebreak + 'BLOG INFO:\n')
+    print(linebreak + 'BLOG INFO TEST #1:\n')
 
     get_blog_info = TumblrRequest()
     get_blog_info.get(url='v2/blog/krubasaur.tumblr.com/info')
 
-    print(linebreak + 'BLOG POSTS:\n')
+    print(linebreak + 'BLOG INFO TEST #2:\n')
 
-    get_blog_posts = TumblrRequest()
-    get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
+    request = TumblrRequest()
+    request.get_blog_info()
 
-    print(linebreak + 'BLOG AVATAR:\n')
-    get_avatar = TumblrRequest()
-    get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
-
-    print(linebreak + 'TAGGED POSTS:\n')
-    get_tagged_posts = TumblrRequest()
-    get_tagged_posts.get(url='v2/tagged?tag=happy')
+    # print(linebreak + 'BLOG POSTS:\n')
+    #
+    # get_blog_posts = TumblrRequest()
+    # get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
+    #
+    # print(linebreak + 'BLOG AVATAR:\n')
+    # get_avatar = TumblrRequest()
+    # get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
+    #
+    # print(linebreak + 'TAGGED POSTS:\n')
+    # get_tagged_posts = TumblrRequest()
+    # get_tagged_posts.get(url='v2/tagged?tag=happy&limit=1')
 
 if __name__ == '__main__':
     main()
