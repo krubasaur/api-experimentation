@@ -13,11 +13,6 @@ class TumblrRequest(object):
         host="http://api.tumblr.com/"
     ):
         self.host = host
-        # self.consumer_key = params.consumer_key
-        # self.consumer_secret = params.consumer_secret
-        # self.oauth_token = params.oauth_token
-        # self.oauth_secret = params.oauth_secret
-        # self.host = host
 
     def get(self, url):
         url = self.host + url
