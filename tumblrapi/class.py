@@ -2,6 +2,7 @@ import requests
 
 import params
 
+# TODO: * test retrieving other types of data than status_code & content 
 
 class TumblrRequest(object):
     def __init__(
@@ -15,7 +16,7 @@ class TumblrRequest(object):
         self.host = host
 
     def get(self, url):
-        
+
         try:
             response = requests.get(
                 url, params={'api_key': params.consumer_key}
@@ -29,34 +30,44 @@ class TumblrRequest(object):
 
     def get_blog_info(self):
         url = self.host + 'v2/blog/krubasaur.tumblr.com/info'
+        self.get(url)
 
+    def get_blog_posts(self):
+        url = self.host + 'v2/blog/krubasaur.tumblr.com/posts'
+        self.get(url)
+
+    def get_avatar(self):
+        url = self.host + 'v2/blog/krubasaur.tumblr.com/avatar'
+        self.get(url)
+
+    def get_tagged_posts(self):
+        url = self.host + 'v2/tagged?tag=happy&limit=1'
         self.get(url)
 
 def main():
     linebreak = '\n\n' + '=' * 80 + '\n\n'
 
-    print(linebreak + 'BLOG INFO TEST #1:\n')
 
-    get_blog_info = TumblrRequest()
-    get_blog_info.get(url='v2/blog/krubasaur.tumblr.com/info')
-
-    print(linebreak + 'BLOG INFO TEST #2:\n')
+    print(linebreak + 'BLOG INFO TEST:\n')
 
     request = TumblrRequest()
     request.get_blog_info()
 
-    # print(linebreak + 'BLOG POSTS:\n')
-    #
-    # get_blog_posts = TumblrRequest()
-    # get_blog_posts.get(url='v2/blog/krubasaur.tumblr.com/posts')
-    #
-    # print(linebreak + 'BLOG AVATAR:\n')
-    # get_avatar = TumblrRequest()
-    # get_avatar.get(url='v2/blog/krubasaur.tumblr.com/avatar')
-    #
-    # print(linebreak + 'TAGGED POSTS:\n')
-    # get_tagged_posts = TumblrRequest()
-    # get_tagged_posts.get(url='v2/tagged?tag=happy&limit=1')
+
+    print(linebreak + 'BLOG POSTS TEST:\n')
+
+    request = TumblrRequest()
+    request.get_blog_posts()
+
+    print(linebreak + 'BLOG AVATAR TEST:\n')
+    request = TumblrRequest()
+    request.get_avatar()
+
+
+    print(linebreak + 'TAGGED POSTS TEST:\n')
+    request = TumblrRequest()
+    request.get_tagged_posts()
+
 
 if __name__ == '__main__':
     main()
