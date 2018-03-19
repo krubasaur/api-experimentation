@@ -1,5 +1,7 @@
-import params
 import requests
+
+import params
+
 
 class TumblrRequest(object):
     def __init__(
@@ -7,9 +9,9 @@ class TumblrRequest(object):
         consumer_key=params.consumer_key,
         consumer_secret=params.consumer_secret,
         oauth_token=params.oauth_token,
-        oauth_secret=params.token_secret, #change in params.py
-        host="http://api.tumblr.com"):
-
+        oauth_secret=params.token_secret,  # change in params.py
+        host="http://api.tumblr.com/"
+    ):
         self.host = host
         # self.consumer_key = params.consumer_key
         # self.consumer_secret = params.consumer_secret
@@ -22,7 +24,7 @@ class TumblrRequest(object):
 
         try:
             response = requests.get(
-            url, params={params.consumer_key}
+                url, params={'api_key': params.consumer_key}
             )
             print('Response HTTP Status Code: {status_code}'.format(
                 status_code=response.status_code))
@@ -32,7 +34,10 @@ class TumblrRequest(object):
             print('HTTP Request failed')
 
 
-tumblr_request = TumblrRequest()
+def main():
+    tumblr_request = TumblrRequest()
+    tumblr_request.get(url='v2/blog/krubasaur.tumblr.com/info')
 
-request = tumblr_request.get(url='v2/blog/krubasaur.tumblr.com/info')
-request()
+
+if __name__ == '__main__':
+    main()
