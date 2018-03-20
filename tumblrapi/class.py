@@ -22,11 +22,10 @@ class TumblrRequest(object):
                 url, params={'api_key': params.consumer_key}
             )
 
+            print('Status Code: {status_code}'.format(
+                status_code=response.status_code))
             return response
-            # print('Response HTTP Status Code: {status_code}'.format(
-            #     status_code=response.status_code))
-            # print('Response HTTP Response Body: {content}'.format(
-            #     content=response.content))
+
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
@@ -44,11 +43,23 @@ class TumblrRequest(object):
 
     def get_tagged_posts(self):
         url = self.host + 'v2/tagged?tag=happy&limit=1'
-        response = self.get(url)
-        print('Status Code: {status_code}'.format(status_code=response.status_code))
-        r = response.json()
+        response = self.get(url).json()
 
-        print(r['response'][0]['type'])
+        print(response['response']) # to see json object options
+        print(response['response'][0]['type'])
+        print(response['response'][0]['blog_name'])
+        print(response['response'][0]['date'])
+
+        print("""
+            Tagged Post Data:
+
+            \t* Blog Name: {blog_name}
+            \t* Post Type: {type}
+            \t* Date Posted: {date}.""".format(
+                blog_name=response['response'][0]['blog_name'],
+                type=response['response'][0]['type'],
+                date=response['response'][0]['date'],
+                ))
 
 
 def main():
