@@ -2,7 +2,7 @@ import requests
 
 import params
 
-# TODO: * test retrieving other types of data than status_code & content 
+# TODO: * test retrieving other types of data than status_code & content
 
 class TumblrRequest(object):
     def __init__(
@@ -16,15 +16,15 @@ class TumblrRequest(object):
         self.host = host
 
     def get(self, url):
-
         try:
             response = requests.get(
                 url, params={'api_key': params.consumer_key}
             )
-            print('Response HTTP Status Code: {status_code}'.format(
+
+            print('Status Code: {status_code}'.format(
                 status_code=response.status_code))
-            print('Response HTTP Response Body: {content}'.format(
-                content=response.content))
+            return response
+
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
@@ -42,27 +42,41 @@ class TumblrRequest(object):
 
     def get_tagged_posts(self):
         url = self.host + 'v2/tagged?tag=happy&limit=1'
-        self.get(url)
+        response = self.get(url).json()
+
+        print(response['response']) # to see json object options
+
+        print("""
+            Tagged Post Data:
+
+            \t* Blog Name: {blog_name}
+            \t* Post Type: {type}
+            \t* Date Posted: {date}.""".format(
+                blog_name=response['response'][0]['blog_name'],
+                type=response['response'][0]['type'],
+                date=response['response'][0]['date'],
+                ))
+
 
 def main():
     linebreak = '\n\n' + '=' * 80 + '\n\n'
 
 
-    print(linebreak + 'BLOG INFO TEST:\n')
-
-    request = TumblrRequest()
-    request.get_blog_info()
-
-
-    print(linebreak + 'BLOG POSTS TEST:\n')
-
-    request = TumblrRequest()
-    request.get_blog_posts()
-
-    print(linebreak + 'BLOG AVATAR TEST:\n')
-    request = TumblrRequest()
-    request.get_avatar()
-
+    # print(linebreak + 'BLOG INFO TEST:\n')
+    #
+    # request = TumblrRequest()
+    # request.get_blog_info()
+    #
+    #
+    # print(linebreak + 'BLOG POSTS TEST:\n')
+    #
+    # request = TumblrRequest()
+    # request.get_blog_posts()
+    #
+    # print(linebreak + 'BLOG AVATAR TEST:\n')
+    # request = TumblrRequest()
+    # request.get_avatar()
+    #
 
     print(linebreak + 'TAGGED POSTS TEST:\n')
     request = TumblrRequest()
