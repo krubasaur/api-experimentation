@@ -16,7 +16,6 @@ class TumblrRequest(object):
         self.host = host
 
     def get(self, url):
-
         try:
             response = requests.get(
                 url, params={'api_key': params.consumer_key}
@@ -46,7 +45,7 @@ class TumblrRequest(object):
         response = self.get(url).json()
 
         print(response['response']) # to see json object options
-        
+
         print("""
             Tagged Post Data:
 
