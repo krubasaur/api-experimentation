@@ -46,10 +46,7 @@ class TumblrRequest(object):
         response = self.get(url).json()
 
         print(response['response']) # to see json object options
-        print(response['response'][0]['type'])
-        print(response['response'][0]['blog_name'])
-        print(response['response'][0]['date'])
-
+        
         print("""
             Tagged Post Data:
 
