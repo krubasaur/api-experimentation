@@ -43,19 +43,10 @@ class TumblrRequest(object):
     def get_tagged_posts(self):
         url = self.host + 'v2/tagged?tag=happy&limit=1'
         response = self.get(url).json()
+        return response
+        # print(response['response']) # to see json object options
 
-        print(response['response']) # to see json object options
 
-        print("""
-            Tagged Post Data:
-
-            \t* Blog Name: {blog_name}
-            \t* Post Type: {type}
-            \t* Date Posted: {date}.""".format(
-                blog_name=response['response'][0]['blog_name'],
-                type=response['response'][0]['type'],
-                date=response['response'][0]['date'],
-                ))
 
 
 def main():
@@ -80,8 +71,20 @@ def main():
 
     print(linebreak + 'TAGGED POSTS TEST:\n')
     request = TumblrRequest()
-    request.get_tagged_posts()
+    tagged_posts = request.get_tagged_posts()
 
+    print(tagged_posts) # prints entire response contnets
+
+    print("""
+        Tagged Post Data:
+
+        \t* Blog Name: {blog_name}
+        \t* Post Type: {type}
+        \t* Date Posted: {date}.""".format(
+            blog_name=tagged_posts['response'][0]['blog_name'],
+            type=tagged_posts['response'][0]['type'],
+            date=tagged_posts['response'][0]['date'],
+            ))
 
 if __name__ == '__main__':
     main()
