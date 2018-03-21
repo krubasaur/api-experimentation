@@ -40,51 +40,7 @@ class TumblrRequest(object):
         url = self.host + 'v2/blog/krubasaur.tumblr.com/avatar'
         self.get(url)
 
-    def get_tagged_posts(self):
-        url = self.host + 'v2/tagged?tag=happy&limit=1'
+    def get_tagged_posts(self, tag, limit):
+        url = self.host + 'v2/tagged?tag={tag}&limit={limit}'.format(tag=tag, limit=limit)
         response = self.get(url).json()
         return response
-        # print(response['response']) # to see json object options
-
-
-
-
-def main():
-    linebreak = '\n\n' + '=' * 80 + '\n\n'
-
-
-    # print(linebreak + 'BLOG INFO TEST:\n')
-    #
-    # request = TumblrRequest()
-    # request.get_blog_info()
-    #
-    #
-    # print(linebreak + 'BLOG POSTS TEST:\n')
-    #
-    # request = TumblrRequest()
-    # request.get_blog_posts()
-    #
-    # print(linebreak + 'BLOG AVATAR TEST:\n')
-    # request = TumblrRequest()
-    # request.get_avatar()
-    #
-
-    print(linebreak + 'TAGGED POSTS TEST:\n')
-    request = TumblrRequest()
-    tagged_posts = request.get_tagged_posts()
-
-    print(tagged_posts) # prints entire response contnets
-
-    print("""
-        Tagged Post Data:
-
-        \t* Blog Name: {blog_name}
-        \t* Post Type: {type}
-        \t* Date Posted: {date}.""".format(
-            blog_name=tagged_posts['response'][0]['blog_name'],
-            type=tagged_posts['response'][0]['type'],
-            date=tagged_posts['response'][0]['date'],
-            ))
-
-if __name__ == '__main__':
-    main()
