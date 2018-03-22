@@ -1,14 +1,15 @@
-import os
+#!/usr/bin/env python
 
+import os
 import requests
 
-import params
+import api
+# from lib.tumblr.params import params
 
-import client
 
 
 def print_tagged_posts(tag, limit):
-    request = client.TumblrRequest()
+    request = api.Client()
     posts = request.get_tagged_posts(tag, limit)
 
     post_count = 0
@@ -36,7 +37,7 @@ def main():
     linebreak = nl * 2 + '=' * 80 + nl * 2
 
     print(linebreak + 'TAGGED POSTS TEST:' + nl)
-    request = client.TumblrRequest()
+    request = api.Client()
     tagged_posts = request.get_tagged_posts('smile', 2)
 
     print(tagged_posts) # prints entire response contnets
