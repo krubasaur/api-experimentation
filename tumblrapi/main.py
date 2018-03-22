@@ -53,7 +53,7 @@ def main():
 
     print(tagged_posts) # prints entire response contnets
 
-    print(print_tagged_posts('happy', 2))
+    print_tagged_posts('happy', 2)
 
 
 if __name__ == '__main__':
