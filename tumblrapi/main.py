@@ -38,7 +38,10 @@ def main():
     print(tagged_posts) # prints entire response contnets
 
     print_tagged_posts('happy', 2)
-    
+
+    request = client.TumblrRequest()
+    krubasaur_posts = request.get_blog('krubasaur', 'posts')
+    print(krubasaur_posts)
 
 if __name__ == '__main__':
     main()
