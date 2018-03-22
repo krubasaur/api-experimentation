@@ -2,13 +2,13 @@ import requests
 
 import params
 
-class TumblrRequest(object):
+class Client(object):
     def __init__(
         self,
         consumer_key=params.consumer_key,
         consumer_secret=params.consumer_secret,
         oauth_token=params.oauth_token,
-        oauth_secret=params.token_secret,  # change in params.py
+        oauth_secret=params.oauth_secret,
         host="http://api.tumblr.com/"
     ):
         self.host = host
