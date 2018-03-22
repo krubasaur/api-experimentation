@@ -2,8 +2,6 @@ import requests
 
 import params
 
-# TODO: * test retrieving other types of data than status_code & content
-
 class TumblrRequest(object):
     def __init__(
         self,
@@ -34,6 +32,6 @@ class TumblrRequest(object):
         return response
 
     def get_tagged_posts(self, tag, limit):
-        url = self.host + 'v2/tagged?tag={tag}&limit={limit}'.format(tag=tag, limit=limit)
+        url = self.host + f"v2/tagged?tag={tag}&limit={limit}"
         response = self.get(url).json()
         return response
