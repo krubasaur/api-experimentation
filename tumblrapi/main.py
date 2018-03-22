@@ -10,21 +10,28 @@ import client
 def print_tagged_posts(tag, limit):
     request = client.TumblrRequest()
     posts = request.get_tagged_posts(tag, limit)
+
     post_count = 0
 
+
+
+
+
     for i in posts:
-        print("""
+
+        blog_name = posts['response'][post_count]['blog_name']
+        slug = posts['response'][post_count]['slug']
+        post_type = posts['response'][post_count]['type']
+        date = posts['response'][post_count]['date']
+
+        print(f"""
             Tagged Post Data:
 
             \t* Blog Name: {blog_name}
             \t* Post Title: {slug}
-            \t* Post Type: {type}
-            \t* Date Posted: {date}.""".format(
-                blog_name=posts['response'][post_count]['blog_name'],
-                slug=posts['response'][post_count]['slug'],
-                type=posts['response'][post_count]['type'],
-                date=posts['response'][post_count]['date'],
-                ))
+            \t* Post Type: {post_type}
+            \t* Date Posted: {date}."""
+            )
         post_count =+ 1
 
 
