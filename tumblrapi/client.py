@@ -2,8 +2,6 @@ import requests
 
 import params
 
-# TODO: * test retrieving other types of data than status_code & content
-
 class TumblrRequest(object):
     def __init__(
         self,
@@ -28,19 +26,12 @@ class TumblrRequest(object):
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
-    def get_blog_info(self):
-        url = self.host + 'v2/blog/krubasaur.tumblr.com/info'
-        self.get(url)
-
-    def get_blog_posts(self):
-        url = self.host + 'v2/blog/krubasaur.tumblr.com/posts'
-        self.get(url)
-
-    def get_avatar(self):
-        url = self.host + 'v2/blog/krubasaur.tumblr.com/avatar'
-        self.get(url)
+    def get_blog(self, blog, page):
+        url = self.host + f"v2/blog/{blog}.tumblr.com/{page}"
+        response = self.get(url).json()
+        return response
 
     def get_tagged_posts(self, tag, limit):
-        url = self.host + 'v2/tagged?tag={tag}&limit={limit}'.format(tag=tag, limit=limit)
+        url = self.host + f"v2/tagged?tag={tag}&limit={limit}"
         response = self.get(url).json()
         return response
