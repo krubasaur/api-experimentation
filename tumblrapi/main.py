@@ -13,10 +13,6 @@ def print_tagged_posts(tag, limit):
 
     post_count = 0
 
-
-
-
-
     for i in posts:
 
         blog_name = posts['response'][post_count]['blog_name']
@@ -36,9 +32,10 @@ def print_tagged_posts(tag, limit):
 
 
 def main():
-    linebreak = '\n\n' + '=' * 80 + '\n\n'
+    nl = os.linesep
+    linebreak = nl * 2 + '=' * 80 + nl * 2
 
-    print(linebreak + 'TAGGED POSTS TEST:\n')
+    print(linebreak + 'TAGGED POSTS TEST:' + nl)
     request = client.TumblrRequest()
     tagged_posts = request.get_tagged_posts('smile', 2)
 
@@ -46,9 +43,6 @@ def main():
 
     print_tagged_posts('happy', 2)
 
-    request = client.TumblrRequest()
-    krubasaur_posts = request.get_blog('krubasaur', 'posts')
-    print(krubasaur_posts)
 
 if __name__ == '__main__':
     main()
