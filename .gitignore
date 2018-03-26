@@ -1,4 +1,6 @@
 scratch.py
 client_setup.py
 params.py
+youtube/api.py
+youtube/main.py
 __pycache__
