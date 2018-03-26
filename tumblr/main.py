@@ -4,7 +4,6 @@ import os
 import requests
 
 import api
-# from lib.tumblr.params import params
 
 
 
