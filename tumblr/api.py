@@ -1,22 +1,25 @@
 import requests
 
-import params
+import credentials
 
 class Client(object):
     def __init__(
         self,
-        consumer_key=params.consumer_key,
-        consumer_secret=params.consumer_secret,
-        oauth_token=params.oauth_token,
-        oauth_secret=params.oauth_secret,
+        consumer_key=credentials.consumer_key,
+        consumer_secret=credentials.consumer_secret,
+        oauth_token=credentials.oauth_token,
+        oauth_secret=credentials.oauth_secret,
         host="http://api.tumblr.com/"
     ):
         self.host = host
 
-    def get(self, url):
+    def get(self, url, params):
+        if params:
+            for i in params:
+                params = params
         try:
             response = requests.get(
-                url, params={'api_key': params.consumer_key}
+                url, params=params
             )
 
             print('Status Code: {status_code}'.format(
@@ -29,6 +32,11 @@ class Client(object):
     def get_blog(self, blog, page):
         url = self.host + f"v2/blog/{blog}.tumblr.com/{page}"
         response = self.get(url).json()
+        return response
+
+    def get_blog_posts(self, blog):
+        url = self.host + f"v2/blog/{blog}.tumblr.com/posts"
+        response = self.get(url, params={'api_key': credentials.consumer_key}).json()
         return response
 
     def get_tagged_posts(self, tag, limit):
