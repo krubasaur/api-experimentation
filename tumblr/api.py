@@ -2,6 +2,9 @@ import requests
 
 import credentials
 
+#TODO: make get_tagged_posts() work with new param capabilities (i.e. "limit" is
+    # now recognized as a param.) Need to make params format properly for url.
+
 class Client(object):
     def __init__(
         self,
