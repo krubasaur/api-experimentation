@@ -1,5 +1,5 @@
 scratch.py
-credentials.py
+tumblr/credentials.py
 client_setup.py
 params.py
 youtube/api.py
