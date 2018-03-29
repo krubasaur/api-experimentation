@@ -1,6 +1,0 @@
-consumer_key = 'BqZ82Npt830umugqoLUiURKX2GlJWQi1BK3cHtZRmK9kh2eW5B'
-consumer_secret = 'pYsIsKAKrqtr4F6LCcRTYMmjafYpdjgIn1Gwgo7WE05B31AK20'
-oauth_token = 'zCcaJIPrO3gnTBfEFnyUSDAOuoeMJeYz5thtouVdnMtx9ZLiz5'
-oauth_secret = 'PNluMDDAv8yx8btxnTuuN8KWGUMoW23PwR2l6oMS4OfhshYVfW'
-oauth_nonce = 'hgXEAqawhntuFKukoc5AVOwsXOc6L30R'
-oauth_signature = '%2F3%2FjHjZpHg6rvCB0xMKmUZY4XAs%3D'
