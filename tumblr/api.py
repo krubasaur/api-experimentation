@@ -20,6 +20,8 @@ class Client(object):
         if params:
             for i in params:
                 params = params
+        # print(params)
+
         try:
             response = requests.get(
                 url, params=params
@@ -37,12 +39,24 @@ class Client(object):
         response = self.get(url).json()
         return response
 
-    def get_blog_posts(self, blog):
+    def get_blog_posts(self, blog, params):
+        if params:
+            for i in params:
+                params = params
+        else:
+            params = None
+
         url = self.host + f"v2/blog/{blog}.tumblr.com/posts"
-        response = self.get(url, params={'api_key': credentials.consumer_key}).json()
+        response = self.get(url, params).json()
         return response
 
-    def get_tagged_posts(self, tag, limit):
-        url = self.host + f"v2/tagged?tag={tag}&limit={limit}"
-        response = self.get(url).json()
+    def get_tagged_posts(self, tag, params):
+        if params:
+            for i in params:
+                params = params
+        else:
+            params = None
+        print(params)
+        url = self.host + f"v2/tagged?tag={tag}"
+        response = self.get(url, params).json()
         return response
