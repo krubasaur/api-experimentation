@@ -1,4 +1,5 @@
 scratch.py
+credentials.py
 client_setup.py
 params.py
 youtube/api.py
