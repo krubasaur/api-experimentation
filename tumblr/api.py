@@ -34,11 +34,6 @@ class Client(object):
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
-    def get_blog(self, blog, page):
-        url = self.host + f"v2/blog/{blog}.tumblr.com/{page}"
-        response = self.get(url).json()
-        return response
-
     def get_blog_posts(self, blog, params):
         if params:
             for i in params:
