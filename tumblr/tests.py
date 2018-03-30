@@ -36,7 +36,7 @@ def print_blog_posts():
     post_count = 0
     for post in posts:
         print(f'Post #{post_count}:')
-        print(posts['response']['posts'][post_count]['id'])
+        print(posts['response']['posts'][post_count]['post_url'])
         post_count =+ 1
 
 
@@ -44,10 +44,10 @@ def main():
     nl = os.linesep
     linebreak = nl * 2 + '=' * 80 + nl * 2
 
-    print(linebreak + 'TAGGED POSTS TEST:' + nl)
+    # print(linebreak + 'TAGGED POSTS TEST:' + nl)
 
 
-    print_tagged_posts('happy', '2')
+    # print_tagged_posts('happy', '2')
     print_blog_posts()
 
 if __name__ == '__main__':
