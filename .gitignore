@@ -1,7 +1,8 @@
-scratch.py
-tumblr/credentials.py
+.env
+__pycache__
 client_setup.py
 params.py
+scratch.py
+tumblr/credentials.py
 youtube/api.py
 youtube/main.py
-__pycache__
