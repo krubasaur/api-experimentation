@@ -26,8 +26,11 @@ class Client(object):
         response = self.get(url)
         return response
 
-    def get_blog_posts(self, blog, params=None):
+    def get_blog_posts(self, blog, tag=None, limit=20):
         url = f"v2/blog/{blog}.tumblr.com/posts"
+        params = {'limit': limit}
+        if tag is not None:
+            params['tag'] = tag
         response = self.get(url, params)
         return response
 

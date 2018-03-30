@@ -9,10 +9,9 @@ from lib.tumblr.client import Client
 load_dotenv(find_dotenv())
 
 
-def print_tagged_posts(client, tag, limit):
-    params = {'limit': limit}
-    response = client.get_tagged_posts(tag, params)
-    posts = response['response']
+def print_blog_posts(client, blog_id, limit):
+    response = client.get_blog_posts(blog_id, limit=limit)
+    posts = response['response']['posts']
     for post in posts:
         blog_name = post['blog_name']
         slug = post['slug']
@@ -32,7 +31,7 @@ def print_tagged_posts(client, tag, limit):
 
 def main():
     tumblr = Client(os.environ['tumblr_api_key'])
-    print_tagged_posts(tumblr, 'happy', 2)
+    print_blog_posts(tumblr, 'thebroadabroad', 2)
 
 
 if __name__ == '__main__':
