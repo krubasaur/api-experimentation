@@ -6,6 +6,7 @@ import credentials
     # now recognized as a param.) Need to make params format properly for url.
 
 class Client(object):
+    host = 'http://api.tumblr.com/'
     def __init__(
         self,
         consumer_key=credentials.consumer_key,
