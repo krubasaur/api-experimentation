@@ -17,11 +17,10 @@ class Client(object):
     ):
         self.host = host
 
-    def get(self, url, params):
-        if params:
-            for i in params:
-                params = params
-        # print(params)
+    def get(self, url, params=None):
+        if params is None:
+            params = {}
+        req_params = dict(**params)
 
         try:
             response = requests.get(
