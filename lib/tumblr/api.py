@@ -1,30 +1,19 @@
 import requests
 
-import credentials
-
-#TODO: make get_tagged_posts() work with new param capabilities (i.e. "limit" is
-    # now recognized as a param.) Need to make params format properly for url.
-
 class Client(object):
     host = 'http://api.tumblr.com/'
-    def __init__(
-        self,
-        consumer_key=credentials.consumer_key,
-        consumer_secret=credentials.consumer_secret,
-        oauth_token=credentials.oauth_token,
-        oauth_secret=credentials.oauth_secret,
-        host="http://api.tumblr.com/"
-    ):
-        self.host = host
+
+    def __init__(self, api_key):
+        self.api_key = api_key
 
     def get(self, url, params=None):
         if params is None:
             params = {}
-        req_params = dict(**params)
+        req_params = dict(api_key=self.api_key, **params)
 
         try:
             response = requests.get(
-                url, params=params
+                url, params=req_params
             )
 
             print('Status Code: {status_code}'.format(
@@ -34,14 +23,9 @@ class Client(object):
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
 
-    def get_blog_posts(self, blog, params):
-        if params:
-            for i in params:
-                params = params
-        else:
-            params = None
-
-        url = self.host + f"v2/blog/{blog}.tumblr.com/posts"
+    def get_blog_posts(self, blog_name, limit=20):
+        url = self.host + f"v2/blog/{blog_name}.tumblr.com/posts"
+        params = {'limit': limit}
         response = self.get(url, params).json()
         return response
 
