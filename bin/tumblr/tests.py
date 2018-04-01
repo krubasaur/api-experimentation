@@ -49,7 +49,7 @@ def main():
 
 
     # print_tagged_posts('happy', '2')
-    print_blog_posts(tumblr, 'blacknaturals', 2)
+    print_blog_posts(tumblr, 'staff', 2)
 
 if __name__ == '__main__':
     main()
