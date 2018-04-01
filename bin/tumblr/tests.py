@@ -1,7 +1,12 @@
+#!/usr/bin/env python
+
 import os
 
-import credentials, main, api
+from dotenv import find_dotenv, load_dotenv
 
+from lib.tumblr.api import Client
+
+load_dotenv(find_dotenv())
 
 def print_tagged_posts(tag, limit):
     request = api.Client()
@@ -27,20 +32,16 @@ def print_tagged_posts(tag, limit):
         post_count =+ 1
 
 
-def print_blog_posts():
-    request = api.Client()
-
-    blog_name = str(input('Blog name:  '))
-    limit = str(input('# of results:  '))
-    posts = request.get_blog_posts(blog_name, params={'api_key': credentials.consumer_key, 'limit': limit})
-    post_count = 0
+def print_blog_posts(client, blog_id, limit):
+    response = client.get_blog_posts(blog_id, limit=limit)
+    posts = response['response']['posts']
     for post in posts:
-        print(f'Post #{post_count}:')
-        print(posts['response']['posts'][post_count]['post_url'])
-        post_count =+ 1
+        slug = post['slug']
+        print(f'{slug}')
 
 
 def main():
+    tumblr = Client(os.environ['tumblr_api_key'])
     nl = os.linesep
     linebreak = nl * 2 + '=' * 80 + nl * 2
 
@@ -48,7 +49,7 @@ def main():
 
 
     # print_tagged_posts('happy', '2')
-    print_blog_posts()
+    print_blog_posts(tumblr, 'blacknaturals', 2)
 
 if __name__ == '__main__':
     main()
