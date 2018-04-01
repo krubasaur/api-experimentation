@@ -18,9 +18,13 @@ class Client(object):
                 status_code=response.status_code))
         return response.json()
 
-    def get_blog_posts(self, blog_name, limit=20):
-        url = f"v2/blog/{blog_name}.tumblr.com/posts"
+    def get_blog_posts(self, blog_id, limit=20, post_type=None, tag=None):
+        url = f"v2/blog/{blog_id}.tumblr.com/posts"
         params = {'limit': limit}
+        if tag:
+            params['tag'] = tag
+        if post_type:
+            params['post_type'] = post_type
         response = self.get(url, params)
         return response
 
