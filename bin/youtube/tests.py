@@ -13,7 +13,8 @@ class Tests(object):
         print('class initiated')
 
     def print_channel_info(self, client):
-        client.get_channel_info()
+        response = client.get_channel_info()
+        print(response['items'])
 
 def main():
     youtube = Client(os.environ['youtube_api_key'])

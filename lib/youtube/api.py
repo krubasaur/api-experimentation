@@ -12,5 +12,5 @@ class Client(object):
             params = {}
         req_params = dict(key=self.key, part='snippet', id='UC_x5XG1OV2P6uZZ5FSM9Ttw', **params)
 
-        response = requests.get(req_url, params=req_params).json()
-        print(response['items'])
+        response = requests.get(req_url, params=req_params)
+        return response.json()
