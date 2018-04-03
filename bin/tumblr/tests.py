@@ -8,29 +8,49 @@ from lib.tumblr.api import Client
 
 load_dotenv(find_dotenv())
 
-def print_tagged_posts(tag, limit):
-    request = api.Client()
-    posts = request.get_tagged_posts(tag, params={'limit': limit})
+def print_tagged_posts(client, tag, limit):
+    response = client.get_tagged_posts(tag, limit=limit)
+    data = response['response']
 
-    post_count = 0
+    for post in data:
+        post = data[data.index(post)]
 
-    for i in posts:
-
-        blog_name = posts['response'][post_count]['blog_name']
-        slug = posts['response'][post_count]['slug']
-        post_type = posts['response'][post_count]['type']
-        date = posts['response'][post_count]['date']
+        blog_name = post['blog_name']
+        slug = post['slug']
+        post_type = post['type']
+        date = post['date']
+        timestamp = post['timestamp']
+        tags = post['tags']
+        short_url = post['short_url']
 
         print(f"""
-            Tagged Post Data:
+        Blog Name: {blog_name}
+        Slug: {slug}
+        Type: {post_type}
+        Date: {date}
+        Timestamp: {timestamp}
+        Tags: {tags}
+        Short URL: {short_url}
 
-            \t* Blog Name: {blog_name}
-            \t* Post Title: {slug}
-            \t* Post Type: {post_type}
-            \t* Date Posted: {date}."""
-            )
-        post_count =+ 1
-
+        """)
+    # posts = response['response']
+    # for post in posts:
+    #
+    #     blog_name = posts['blog_name']
+    #     # slug = posts['response'][post_count]['slug']
+    #     # post_type = posts['response'][post_count]['type']
+    #     # date = posts['response'][post_count]['date']
+    #     print(f"""
+    #         Tagged Post Data:
+    #
+    #         \t* Blog Name: {blog_name}
+    #         """
+    #         )
+    #         #
+    #         # \t* Post Title: {slug}
+    #         # \t* Post Type: {post_type}
+    #         # \t* Date Posted: {date}.
+    #     post_count =+ 1
 
 def print_blog_posts(client, blog_id, limit, post_type, tag):
     response = client.get_blog_posts(blog_id, limit=limit, post_type=post_type, tag=tag)
@@ -61,7 +81,7 @@ def print_blog_posts(client, blog_id, limit, post_type, tag):
     Date: {date}
     Time: {timestamp}
     Tags: {tags}
-    Short Url: {short_url}
+    Short URL: {short_url}
         """)
 
 
@@ -73,10 +93,10 @@ def main():
     # print(linebreak + 'TAGGED POSTS TEST:' + nl)
 
 
-    # print_tagged_posts('happy', '2')
-    print_blog_posts(tumblr, 'staff', 2, None, None)
-    print_blog_posts(tumblr, 'staff', 5, 'text', 'news')
-    print_blog_posts(tumblr, 'staff', 1, 'photo', None)
+    print_tagged_posts(tumblr, 'happy', '4')
+    # print_blog_posts(tumblr, 'staff', 2, None, None)
+    # print_blog_posts(tumblr, 'staff', 5, 'text', 'news')
+    # print_blog_posts(tumblr, 'staff', 1, 'photo', None)
 
 if __name__ == '__main__':
     main()

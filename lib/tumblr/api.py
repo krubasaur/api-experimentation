@@ -28,13 +28,8 @@ class Client(object):
         response = self.get(url, params)
         return response
 
-    def get_tagged_posts(self, tag, params):
-        if params:
-            for i in params:
-                params = params
-        else:
-            params = None
-        print(params)
+    def get_tagged_posts(self, tag, limit=20):
+        params = {'limit': limit}
         url = f"v2/tagged?tag={tag}"
         response = self.get(url, params)
         return response
