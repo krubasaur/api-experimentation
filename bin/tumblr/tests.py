@@ -72,10 +72,6 @@ class Tests(object):
 
 def main():
     tumblr = Client(os.environ['tumblr_api_key'])
-    nl = os.linesep
-    linebreak = nl * 2 + '=' * 80 + nl * 2
-
-    # print(linebreak + 'TAGGED POSTS TEST:' + nl)
 
     test1 = Tests()
     test1.print_tagged_posts(tumblr, 'happy', '4')
