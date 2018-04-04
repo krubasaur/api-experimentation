@@ -1,6 +1,4 @@
 .env
 credentials.py
 client_setup.py
-bin/youtube/
-lib/youtube/
 __pycache__
