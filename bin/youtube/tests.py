@@ -15,7 +15,20 @@ class Tests(object):
     def print_channel_info(self, client, part, filter):
         params = dict(part=part, **filter)
         response = client.get_channel_info(params)
-        print(response['items'])
+        data = response['items']
+
+
+        for post in data:
+            post = data[data.index(post)]
+            kind = post['kind']
+
+            if part == 'snippet':
+                title = ', ' + post['snippet']['title']
+            else:
+                title = ''
+
+            print(f'{kind}{title}')
+
 
 def main():
     youtube = Client(os.environ['youtube_api_key'])
