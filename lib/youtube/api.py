@@ -14,8 +14,12 @@ class Client(object):
         response = requests.get(url, params=req_params)
         return response.json()
 
-
     def get_channel_info(self, params):
         url = self.host + 'channels'
+        response = self.get(url, params=params)
+        return response
+
+    def get_videos_list(self, params):
+        url = self.host + 'search'
         response = self.get(url, params=params)
         return response
