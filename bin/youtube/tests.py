@@ -10,47 +10,56 @@ load_dotenv(find_dotenv())
 
 class Tests(object):
     def __init__(self):
-        print('class initiated')
+        print('Begin Test')
 
-    def print_channel_info(self, client, part, filter):
-        params = dict(part=part, **filter)
-        response = client.get_channel_info(params)
+    def print_videos_list(self, client, channelId=None, forUsername=None, maxResults=None):
+        response = client.get_videos_list(channelId, forUsername, maxResults)
         data = response['items']
-
-
-        for post in data:
-            post = data[data.index(post)]
-            kind = post['kind']
-
-            if part == 'snippet':
-                title = ', ' + post['snippet']['title']
-            # if part == 'contentDetails':
-            #     contentDetails = post['contentDetails']
-            else:
-                title = ''
-                # contentDetails = None
-
-            print(f'{kind}{title}')
-
-    def print_videos_list(self, client, filter):
-        params = dict(part='snippet', **filter)
-        response = client.get_videos_list(params)
-        data = response['items']
+        if channelId:
+            print('Channel ID Search')
+        if forUsername:
+            print('Username Search')
 
         print('Video IDs:')
+        
         for post in data:
             index = data.index(post)
-            print(response['items'][index]['id']['videoId'])
+            videos = response['items'][index]['id']['videoId']
+            print(videos)
+            return videos
+
+    def find_channel_id(self, client, part=None, forUsername=None):
+        if part is None or forUsername is None:
+            print('Error: "part" or "forUsername" cannot be None.')
+        else:
+            response = client.get_channel_info(part, forUsername)
+            channelId = response['items'][0]['id']
+            return channelId
+            print('Channel ID: ' + channelId)
+
+
+    def find_channel_print_vid_list(self, client, forUsername, maxResults):
+        if forUsername is None:
+            print('Error: "part" or "forUsername" cannot be None.')
+        else:
+            part = 'id'
+            channelId = self.find_channel_id(client, part, forUsername)
+            videos_list = self.print_videos_list(client, channelId, forUsername=None, maxResults=maxResults)
 
 def main():
     youtube = Client(os.environ['youtube_api_key'])
-    # test1 = Tests()
-    # test1.print_channel_info(youtube, 'snippet', {'id': 'UC_x5XG1OV2P6uZZ5FSM9Ttw'})
 
-    # test2 = Tests()
-    # test2.print_channel_info(youtube, 'contentDetails', {'forUsername': 'arulvizhy' })
-    # test2.print_channel_info(youtube, 'snippet', {'id': 'UCNYrK4tc5i1-eL8TXesH2pg'})
-    test3 = Tests()
-    test3.print_videos_list(youtube, {'channelId': 'UCroDJPcFCf6DBmHns6Xeb8g', 'maxResults': 15})
+    print_videos_for_user = Tests()
+    print_videos_for_user.print_videos_list(youtube, forUsername='arulvizhy')
+
+    print_videos_for_channel = Tests()
+    print_videos_for_channel.print_videos_list(youtube, channelId='UCroDJPcFCf6DBmHns6Xeb8g', maxResults=15)
+
+    print_channelId_for_user = Tests()
+    print_channelId_for_user.find_channel_id(youtube, part='id', forUsername=None)
+    print_channelId_for_user.find_channel_id(youtube, part='id', forUsername='arulvizhy')
+
+    print_vids_for_user = Tests()
+    print_vids_for_user.find_channel_print_vid_list(youtube, 'arulvizhy', 5)
 if __name__ == '__main__':
     main()
