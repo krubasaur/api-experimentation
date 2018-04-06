@@ -14,12 +14,25 @@ class Client(object):
         response = requests.get(url, params=req_params)
         return response.json()
 
-    def get_channel_info(self, params):
+    def get_channel_id(self, forUsername):
         url = self.host + 'channels'
+        filters = {}
+        if forUsername is not None:
+            filters['forUsername'] = forUsername
+        params = dict(part='id', **filters)
         response = self.get(url, params=params)
         return response
 
-    def get_videos_list(self, params):
+    def get_videos_list(self, channelId=None, forUsername=None, maxResults=None):
         url = self.host + 'search'
+        filters = {'type': 'video'}
+        if channelId:
+            filters['channelId'] = channelId
+        if forUsername:
+            filters['forUsername'] = forUsername
+        elif maxResults:
+            filters['maxResults'] = maxResults
+
+        params = dict(part='snippet', **filters)
         response = self.get(url, params=params)
         return response
