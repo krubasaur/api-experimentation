@@ -36,7 +36,6 @@ class Tests(object):
             channelId = self.find_channel_id(client, forUsername)
             videos = self.fetch_videos_list(client, channelId, maxResults)
 
-
 def main():
     youtube = Client(os.environ['youtube_api_key'])
 
@@ -50,5 +49,6 @@ def main():
 
     print_vids_for_user = Tests()
     print_vids_for_user.find_channel_fetch_vid_list(youtube, 'arulvizhy', 15)
+    
 if __name__ == '__main__':
     main()
