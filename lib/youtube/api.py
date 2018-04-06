@@ -14,12 +14,12 @@ class Client(object):
         response = requests.get(url, params=req_params)
         return response.json()
 
-    def get_channel_info(self, part, forUsername):
+    def get_channel_id(self, forUsername):
         url = self.host + 'channels'
         filters = {}
         if forUsername is not None:
             filters['forUsername'] = forUsername
-        params = dict(part=part, **filters)
+        params = dict(part='id', **filters)
         response = self.get(url, params=params)
         return response
 
