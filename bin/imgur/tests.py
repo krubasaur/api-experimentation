@@ -1,17 +1,26 @@
-# import os
-# from dotenv import find_dotenv, load_dotenv
-import requests
+#!/usr/bin/env python
 
-# load_dotenv(find_dotenv())
+import os
 
-url = "https://api.imgur.com/oauth2/token"
+from dotenv import find_dotenv, load_dotenv
 
-headers = {
-    'Authorization': "Bearer {envBearer}",
-    'Cache-Control': "no-cache",
-    'Postman-Token': "{token}"
-    }
+from lib.imgur.api import get_subreddit
 
-response = requests.request("GET", url, headers=headers)
+load_dotenv(find_dotenv())
 
-print(response.text)
+class Tests(object):
+    def __init__(self):
+        print('class initiated')
+
+    def get_creds(self):
+        self.url = input('enter URL: ')
+        self.clientId = input('enter clientId')
+        return self.url, self.clientId
+
+def main():
+    test = Tests()
+    test.get_creds()
+    get_subreddit(test.url, test.clientId)
+
+if __name__ == '__main__':
+    main()
