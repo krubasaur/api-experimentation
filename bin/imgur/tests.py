@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-import os
+import os, requests
 
 from dotenv import find_dotenv, load_dotenv
 
-from lib.imgur.api import get_subreddit
+from lib.imgur.api import get_subreddit, get_post_data
 
 load_dotenv(find_dotenv())
 
@@ -17,10 +17,13 @@ class Tests(object):
         self.clientId = input('enter clientId: ')
         return self.url, self.clientId
 
+
+
 def main():
     test = Tests()
     test.get_creds()
     get_subreddit(test.url, test.clientId)
+    get_post_data(test.url, test.clientId)
 
 if __name__ == '__main__':
     main()
