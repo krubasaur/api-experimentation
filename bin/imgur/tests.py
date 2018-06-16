@@ -14,7 +14,7 @@ class Tests(object):
 
     def get_creds(self):
         self.url = input('enter URL: ')
-        self.clientId = input('enter clientId')
+        self.clientId = input('enter clientId: ')
         return self.url, self.clientId
 
 def main():
