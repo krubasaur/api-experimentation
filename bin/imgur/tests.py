@@ -4,7 +4,7 @@ import os, requests
 
 from dotenv import find_dotenv, load_dotenv
 
-from lib.imgur.api import get_subreddit, get_post_data
+from lib.imgur.api import Client
 
 load_dotenv(find_dotenv())
 
@@ -13,17 +13,15 @@ class Tests(object):
         print('class initiated')
 
     def get_creds(self):
-        self.url = input('enter URL: ')
-        self.clientId = input('enter clientId: ')
-        return self.url, self.clientId
-
-
+        self.url = input('enter subreddit: ')
+        return self.url
 
 def main():
-    test = Tests()
-    test.get_creds()
-    get_subreddit(test.url, test.clientId)
-    get_post_data(test.url, test.clientId)
+    imgur = Client(os.environ['imgur_client_id'])
+    test1 = Tests()
+    test1.get_creds()
+    imgur.get_subreddit(test1.url)
+    imgur.get_post_data(test1.url)
 
 if __name__ == '__main__':
     main()
